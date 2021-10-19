@@ -1,7 +1,12 @@
 rtw88
 ===========
-### A repo for the newest Realtek rtlwifi codes.
+### A repo for the newest Realtek rtlwifi codes
 
+This repo is an improvement of [iwfinger's repo](https://github.com/lwfinger/rtw88). This is a fork that fixes the code to compile on Centos (or any RHEL-based).
+
+Works for RHEL, Centos, Rocky Linux, Alma Linux and Oracle Linux.
+
+### Description from original repo
 This code will build on any kernel 4.19 and newer as long as the distro has not modified
 any of the kernel APIs. IF YOU RUN UBUNTU, YOU CAN BE ASSURED THAT THE APIs HAVE CHANGED.
 NO, I WILL NOT MODIFY THE SOURCE FOR YOU. YOU ARE ON YOUR OWN!!!!!
@@ -29,22 +34,24 @@ When making these changes, I tried to watch for things that might be incompatibl
 with older kernels. As this kind of updating in really boring, I might have missed
 something. Please let me know of build problems.
 
-
 ### Installation instruction
 ##### Requirements
 You will need to install "make", "gcc", "kernel headers", "kernel build essentials", and "git".
-You can install them with the following command, on **Ubuntu**:
+You can install them with the following command, on **Centos**:
 ```bash
-sudo apt-get update
-sudo apt-get install make gcc linux-headers-$(uname -r) build-essential git
+sudo dnf install git dkms kernel-headers kernel-devel
 ```
-If any of the packets above are not found check if your distro installs them like that. 
+
+If ```dkms``` is not found, install EPEL:
+```bash
+sudo dnf install epel-release
+```
 
 ##### Installation
 For all distros:
 ```bash
-git clone https://github.com/lwfinger/rtw88.git
-cd rtw88
+git clone https://github.com/vgdaut/rtw88-centos
+cd rtw88-centos
 make
 sudo make install
 ```
@@ -84,7 +91,7 @@ The available options for rtw_core are lps_deep_mode, support_bf,  and debug_mas
 
 When your kernel changes, then you need to do the following:
 ```bash
-cd ~/rtw88
+cd ~/rtw88-centos
 git pull
 make
 sudo make install
